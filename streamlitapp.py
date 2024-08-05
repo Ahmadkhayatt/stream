@@ -15,12 +15,17 @@ url = 'https://raw.githubusercontent.com/Ahmadkhayatt/stream/main/News.csv'
 df = load_data(url)
 length = len(df)
 
-# Streamlit App
+# Ensure the DataFrame has the expected columns
+expected_columns = ['Article Name', 'context', 'image', 'url']
+for col in expected_columns:
+    if col not in df.columns:
+        st.error(f"Missing column in data: {col}")
 
 window_texts = ["Read" for _ in range(length)]
 Names = df['Article Name'].tolist()
 page_contents = df['context'].tolist()
 image_paths = df['image'].tolist()  # Convert to list to avoid any potential issues
+urls = df['url'].tolist()
 
 # Initialize session state if not already done
 if 'page' not in st.session_state:
@@ -67,6 +72,10 @@ def content_page(window_index):
         st.write(f"No image for index {window_index}")
 
     st.write(page_contents[window_index])
+
+    # Display the URL
+    st.write("Read more at: ")
+    st.markdown(f"[{urls[window_index]}]({urls[window_index]})")
     
     if st.button("Back to Main Page"):
         st.session_state.page = -1  # Reset to main page
