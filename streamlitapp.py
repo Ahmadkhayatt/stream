@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import requests
+import io
 st.write("hello")
 @st.cache_data
 def load_data(url):
