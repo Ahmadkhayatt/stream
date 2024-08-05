@@ -2,10 +2,10 @@ import pandas as pd
 import streamlit as st
 import requests
 st.write("hello")
-@st.cache
+@st.cache_data
 def load_data(url):
     response = requests.get(url)
-    df = pd.read_csv(pd.compat.StringIO(response.text))
+    df = pd.read_csv(io.StringIO(response.text))
     return df
 
 url = 'https://raw.githubusercontent.com/Ahmadkhayatt/stream/main/News.csv'
