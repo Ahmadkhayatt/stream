@@ -2,7 +2,9 @@ import pandas as pd
 import streamlit as st
 import requests
 import io
+
 st.write("hello")
+
 @st.cache_data
 def load_data(url):
     response = requests.get(url)
@@ -52,6 +54,7 @@ def main_page(length):
             
             if st.button(window_texts[i], key=f"button_{i}"):
                 st.session_state.page = i
+                st.experimental_set_query_params(page=i)
                 st.experimental_rerun()
 
 # Function to create the content page for a specific window
@@ -67,6 +70,7 @@ def content_page(window_index):
     
     if st.button("Back to Main Page"):
         st.session_state.page = -1
+        st.experimental_set_query_params(page=-1)
         st.experimental_rerun()
 
 # Display the appropriate page
