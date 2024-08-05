@@ -75,6 +75,3 @@ if st.session_state.page == -1:
     main_page(length)
 else:
     content_page(st.session_state.page)
-
-# Rerun to update the display
-st.experimental_rerun()
