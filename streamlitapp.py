@@ -22,6 +22,10 @@ Names = df['Article Name'].tolist()
 page_contents = df['context'].tolist()
 image_paths = df['image'].tolist()  # Convert to list to avoid any potential issues
 
+# Initialize session state if not already done
+if 'page' not in st.session_state:
+    st.session_state.page = -1
+
 # Function to create the main page with dynamic windows
 def main_page(length):
     st.title("Main Page")
@@ -50,6 +54,7 @@ def main_page(length):
             
             # Button to navigate to content page
             if st.button(window_texts[i], key=f"button_{i}"):
+                st.session_state.page = i
                 st.experimental_set_query_params(page=i)
 
 # Function to create the content page for a specific window
@@ -64,14 +69,18 @@ def content_page(window_index):
     st.write(page_contents[window_index])
     
     if st.button("Back to Main Page"):
-        st.experimental_set_query_params(page=-1)  # Reset to main page
+        st.session_state.page = -1  # Reset to main page
+        st.experimental_set_query_params(page=-1)
 
 # Get the current page from query params
 query_params = st.experimental_get_query_params()
 page = int(query_params.get("page", [-1])[0])
 
+# Update the session state based on the query params
+st.session_state.page = page
+
 # Display the appropriate page
-if page == -1:
+if st.session_state.page == -1:
     main_page(length)
 else:
-    content_page(page)
+    content_page(st.session_state.page)
