@@ -1,8 +1,15 @@
 import pandas as pd
 import streamlit as st
+import requests
 
-# Load the CSV file
-df = pd.read_csv('News.csv')
+@st.cache
+def load_data(url):
+    response = requests.get(url)
+    df = pd.read_csv(pd.compat.StringIO(response.text))
+    return df
+
+url = 'https://raw.githubusercontent.com/Ahmadkhayatt/stream/main/News.csv'
+df = load_data(url)
 length = len(df)
 
 # Streamlit App
