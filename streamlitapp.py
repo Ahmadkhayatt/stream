@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 # Load the CSV file
-df = pd.read_csv('C:/Users/ahmad/Desktop/projectr/News.csv')
+df = pd.read_csv('News.csv')
 length = len(df)
 
 # Streamlit App
