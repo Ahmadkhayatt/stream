@@ -52,10 +52,10 @@ def main_page(length):
             else:
                 st.write(f"Index {i} is out of bounds for Names.")
             
+            # Use a button to navigate to content page
             if st.button(window_texts[i], key=f"button_{i}"):
                 st.session_state.page = i
-                st.experimental_set_query_params(page=i)
-                st.experimental_rerun()
+                break  # Exit the loop after setting the page
 
 # Function to create the content page for a specific window
 def content_page(window_index):
@@ -69,9 +69,7 @@ def content_page(window_index):
     st.write(page_contents[window_index])
     
     if st.button("Back to Main Page"):
-        st.session_state.page = -1
-        st.experimental_set_query_params(page=-1)
-        st.experimental_rerun()
+        st.session_state.page = -1  # Reset to main page
 
 # Display the appropriate page
 if st.session_state.page == -1:
