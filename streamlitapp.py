@@ -75,7 +75,7 @@ def content_page(window_index):
 
     # Display the URL
     st.write("Read more at: ")
-    st.markdown(f"[{urls[window_index]}]({urls[window_index]})")
+    st.markdown(f"[{page_url[window_index]}]({page_url[window_index]})")
     
     if st.button("Back to Main Page"):
         st.session_state.page = -1  # Reset to main page
