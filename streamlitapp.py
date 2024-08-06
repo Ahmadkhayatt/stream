@@ -16,7 +16,7 @@ df = load_data(url)
 length = len(df)
 
 # Ensure the DataFrame has the expected columns
-expected_columns = ['Article Name', 'context', 'image', 'url']
+expected_columns = ['Article Name', 'context', 'image', 'page_url']
 for col in expected_columns:
     if col not in df.columns:
         st.error(f"Missing column in data: {col}")
