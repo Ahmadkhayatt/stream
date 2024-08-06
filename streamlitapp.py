@@ -25,7 +25,7 @@ window_texts = ["Read" for _ in range(length)]
 Names = df['Article Name'].tolist()
 page_contents = df['context'].tolist()
 image_paths = df['image'].tolist()  # Convert to list to avoid any potential issues
-urls = df['url'].tolist()
+page_url = df['page_url'].tolist()
 
 # Initialize session state if not already done
 if 'page' not in st.session_state:
