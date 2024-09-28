@@ -16,7 +16,7 @@ df = load_data(url)
 length = len(df)
 
 # Ensure the DataFrame has the expected columns
-expected_columns = ['Article Name', 'context', 'page_url', 'output']  # Removed image column
+expected_columns = ['Article Name', 'context', 'page_url', 'output']  # Ensure the output column is included
 for col in expected_columns:
     if col not in df.columns:
         st.error(f"Missing column in data: {col}")
@@ -25,7 +25,7 @@ window_texts = ["Read" for _ in range(length)]
 Names = df['Article Name'].tolist()
 page_contents = df['context'].tolist()
 page_url = df['page_url'].tolist()
-output_texts = df['output'].tolist()  # Add this line to get the output texts
+output_texts = df['output'].tolist()  # Get the output texts
 
 # Initialize session state if not already done
 if 'page' not in st.session_state:
@@ -65,7 +65,7 @@ def content_page(window_index):
     # Display the output content with a clear description
     st.subheader("Summarized Output")  # Updated header to be clearer
     if pd.notna(output_texts[window_index]):
-        st.write(output_texts[window_index])  # Updated to use output_texts
+        st.write(output_texts[window_index])  # Display the output text
     else:
         st.write(f"No summarized output for index {window_index}")
 
