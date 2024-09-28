@@ -11,12 +11,12 @@ def load_data(url):
     df = pd.read_csv(io.StringIO(response.text))
     return df
 
-url = 'https://raw.githubusercontent.com/Ahmadkhayatt/stream/main/new_file_data2_newliy23.csv'
+url = 'https://raw.githubusercontent.com/Ahmadkhayatt/stream/main/News4.csv'
 df = load_data(url)
 length = len(df)
 
 # Ensure the DataFrame has the expected columns
-expected_columns = ['Article Name', 'context', 'image', 'page_url', 'output']  # Updated to include output
+expected_columns = ['Article Name', 'context', 'page_url', 'output']  # Removed image column
 for col in expected_columns:
     if col not in df.columns:
         st.error(f"Missing column in data: {col}")
@@ -24,7 +24,6 @@ for col in expected_columns:
 window_texts = ["Read" for _ in range(length)]
 Names = df['Article Name'].tolist()
 page_contents = df['context'].tolist()
-image_paths = df['image'].tolist()  # Convert to list to avoid any potential issues
 page_url = df['page_url'].tolist()
 output_texts = df['output'].tolist()  # Add this line to get the output texts
 
@@ -42,14 +41,6 @@ def main_page(length):
         col = cols[i % num_cols]
         
         with col:
-            if i < len(image_paths):
-                if pd.notna(image_paths[i]):
-                    st.image(image_paths[i], use_column_width=True)
-                else:
-                    st.write(f"No image for index {i}")
-            else:
-                st.write(f"Index {i} is out of bounds for image_paths.")
-            
             if i < len(Names):
                 if pd.notna(Names[i]):
                     st.write(Names[i])
@@ -67,11 +58,6 @@ def main_page(length):
 def content_page(window_index):
     st.title(Names[window_index])
     
-    if pd.notna(image_paths[window_index]):
-        st.image(image_paths[window_index], use_column_width=True)
-    else:
-        st.write(f"No image for index {window_index}")
-
     # Display the context content
     st.subheader("Context")
     st.write(page_contents[window_index])
