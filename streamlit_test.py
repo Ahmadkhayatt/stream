@@ -11,7 +11,7 @@ def load_data(url):
     df = pd.read_csv(io.StringIO(response.text))
     return df
 
-url = 'https://raw.githubusercontent.com/Ahmadkhayatt/stream/main/News4.csv'
+url = 'https://raw.githubusercontent.com/Ahmadkhayatt/stream/main/new_file_data2_newliy23.csv'
 df = load_data(url)
 length = len(df)
 
