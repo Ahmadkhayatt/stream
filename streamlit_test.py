@@ -62,8 +62,11 @@ def content_page(window_index):
     st.subheader("Context")
     st.write(page_contents[window_index])
 
-    # Display the output content with a clear description
-    st.subheader("Summarized Output")  # Updated header to be clearer
+    # Display the output content with a clear description in red and bold
+    st.markdown(
+        "<h3 style='color: red; font-weight: bold;'>Summarized Output</h3>",
+        unsafe_allow_html=True
+    )  # Updated header to be clearer and styled
     if pd.notna(output_texts[window_index]):
         st.write(output_texts[window_index])  # Display the output text
     else:
