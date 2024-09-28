@@ -3,7 +3,7 @@ import streamlit as st
 import requests
 import io
 
-st.write("sample 2")
+
 
 @st.cache_data
 def load_data(url):
