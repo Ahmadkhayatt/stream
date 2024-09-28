@@ -11,12 +11,9 @@ def load_data(url):
     df = pd.read_csv(io.StringIO(response.text))
     return df
 
-url = 'https://raw.githubusercontent.com/Ahmadkhayatt/stream/main/new_file_data2_newliy23.csv'
+url = 'https://raw.githubusercontent.com/Ahmadkhayatt/stream/main/News4.csv'
 df = load_data(url)
 length = len(df)
-
-# Inspect the DataFrame columns
-st.write("Columns in the DataFrame:", df.columns.tolist())
 
 # Ensure the DataFrame has the expected columns
 expected_columns = ['Article Name', 'context', 'page_url', 'output']  # Column names including 'output'
@@ -28,13 +25,7 @@ window_texts = ["Read" for _ in range(length)]
 Names = df['Article Name'].tolist()
 page_contents = df['context'].tolist()
 page_url = df['page_url'].tolist()
-
-# Access the output column and handle potential missing column error
-if 'output' in df.columns:
-    output_texts = df['output'].tolist()  # Using 'output' as the column name
-else:
-    st.error("Missing column in data: output")
-    output_texts = []  # Initialize as empty to prevent further errors
+output_texts = df['output'].tolist()  # Using 'output' as the column name
 
 # Initialize session state if not already done
 if 'page' not in st.session_state:
