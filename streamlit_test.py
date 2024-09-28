@@ -16,7 +16,7 @@ df = load_data(url)
 length = len(df)
 
 # Ensure the DataFrame has the expected columns
-expected_columns = ['Article Name', 'context', 'page_url', 'output']  # Ensure the output column is included
+expected_columns = ['Article Name', 'context', 'page_url', 'output']  # Column names including 'output'
 for col in expected_columns:
     if col not in df.columns:
         st.error(f"Missing column in data: {col}")
@@ -25,7 +25,7 @@ window_texts = ["Read" for _ in range(length)]
 Names = df['Article Name'].tolist()
 page_contents = df['context'].tolist()
 page_url = df['page_url'].tolist()
-output_texts = df['output'].tolist()  # Get the output texts
+output_texts = df['output'].tolist()  # Using 'output' as the column name
 
 # Initialize session state if not already done
 if 'page' not in st.session_state:
